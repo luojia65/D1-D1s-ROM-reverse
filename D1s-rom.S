@@ -20,8 +20,8 @@ entry:
    0x22:	li	s1,92
    0x26:	j	5f
 2:
-   0x28:	jal	ra,0x126
-   0x2c:	jal	ra,0x166
+   0x28:	jal	ra,some_function_1
+   0x2c:	jal	ra,some_function_2
    0x30:	j	4f
 3:
    0x32:	lui	t0,0x7000
@@ -91,6 +91,8 @@ entry:
    0x11e:	addi	t0,t0,4
    0x120:	blt	t0,t1,0x11a
    0x124:	ret
+
+some_function_1:
    0x126:	lui	t0,0x7010
    0x12a:	addiw	t0,t0,524
    0x12e:	lwu	t1,0(t0)
@@ -108,12 +110,14 @@ entry:
    0x15c:	or	t3,t2,t1
    0x160:	sw	t3,0(t0)
    0x164:	ret
+
+some_function_2:
    0x166:	lui	t0,0x7090
    0x16a:	addiw	t0,t0,772
    0x16e:	lwu	t1,0(t0)
    0x172:	lui	t2,0x8
    0x174:	and	t3,t1,t2
-   0x178:	beqz	t3,0x19a
+   0x178:	beqz	t3,1f
    0x17c:	lui	t3,0x8
    0x180:	addiw	t3,t3,1
    0x184:	slli	t3,t3,0x10
@@ -122,6 +126,7 @@ entry:
    0x190:	or	t5,t3,t4
    0x194:	sw	t5,0(t0)
    0x198:	ret
+1:
    0x19a:	lui	t3,0x8
    0x19e:	addiw	t3,t3,1
    0x1a2:	lui	a0,0x7ff0
@@ -129,6 +134,8 @@ entry:
    0x1aa:	or	t5,t3,t4
    0x1ae:	sw	t5,0(t0)
    0x1b2:	ret
+
+some_function_4:
    0x1b4:	jr	a0
    0x1b6:	j	0x1b6
    0x1b8:	j	0x1b8
@@ -160,6 +167,8 @@ entry:
    0x208:	ld	s0,40(sp)
    0x20a:	addi	sp,sp,48
    0x20c:	ret
+
+some_function_5:
    0x20e:	addi	sp,sp,-48
    0x210:	sd	s0,40(sp)
    0x212:	addi	s0,sp,48
@@ -190,6 +199,8 @@ entry:
    0x264:	ld	s0,40(sp)
    0x266:	addi	sp,sp,48
    0x268:	ret
+
+some_function_6:
    0x26a:	addi	sp,sp,-48
    0x26c:	sd	s0,40(sp)
    0x26e:	addi	s0,sp,48
@@ -3389,7 +3400,7 @@ entry:
    0x297c:	li	a0,8
    0x297e:	jal	ra,0x26a
    0x2982:	li	a0,1
-   0x2984:	jal	ra,0x20e
+   0x2984:	jal	ra,some_function_5
    0x2988:	addi	a5,s0,-80
    0x298c:	li	a2,56
    0x2990:	li	a1,0
@@ -3406,7 +3417,7 @@ entry:
    0x29b2:	mv	a0,a5
    0x29b4:	jal	ra,0xa066
    0x29b8:	li	a0,2
-   0x29ba:	jal	ra,0x20e
+   0x29ba:	jal	ra,some_function_5
    0x29be:	addi	a5,s0,-80
    0x29c2:	mv	a1,a5
    0x29c4:	ld	a0,-1576(s0)
@@ -3420,7 +3431,7 @@ entry:
    0x29de:	jal	ra,0x1bc
    0x29e2:	j	0x2b56
    0x29e4:	li	a0,5
-   0x29e6:	jal	ra,0x20e
+   0x29e6:	jal	ra,some_function_5
    0x29ea:	addi	a4,s0,-1568
    0x29ee:	addi	a3,s0,-92
    0x29f2:	addi	a5,s0,-88
@@ -3438,7 +3449,7 @@ entry:
    0x2a18:	jal	ra,0x1bc
    0x2a1c:	j	0x2b56
    0x2a1e:	li	a0,6
-   0x2a20:	jal	ra,0x20e
+   0x2a20:	jal	ra,some_function_5
    0x2a24:	ld	a5,-88(s0)
    0x2a28:	lw	a4,-92(s0)
    0x2a2c:	addi	a3,s0,-1536
@@ -3455,7 +3466,7 @@ entry:
    0x2a4c:	jal	ra,0x1bc
    0x2a50:	j	0x2b56
    0x2a52:	li	a0,7
-   0x2a54:	jal	ra,0x20e
+   0x2a54:	jal	ra,some_function_5
    0x2a58:	addi	a5,s0,-1536
    0x2a5c:	mv	a0,a5
    0x2a5e:	jal	ra,0x2742
@@ -3465,7 +3476,7 @@ entry:
    0x2a6c:	sext.w	a5,a5
    0x2a6e:	blez	a5,0x2b50
    0x2a72:	li	a0,8
-   0x2a74:	jal	ra,0x20e
+   0x2a74:	jal	ra,some_function_5
    0x2a78:	jal	ra,0x8000
    0x2a7c:	mv	a5,a0
    0x2a7e:	mv	a4,a5
@@ -3480,7 +3491,7 @@ entry:
    0x2a9a:	sext.w	a5,a5
    0x2a9c:	bltz	a5,0x2b54
    0x2aa0:	li	a0,7
-   0x2aa2:	jal	ra,0x20e
+   0x2aa2:	jal	ra,some_function_5
    0x2aa6:	addi	a4,s0,-1568
    0x2aaa:	addi	a3,s0,-92
    0x2aae:	addi	a5,s0,-88
@@ -3498,7 +3509,7 @@ entry:
    0x2ad4:	jal	ra,0x1bc
    0x2ad8:	j	0x2b56
    0x2ada:	li	a0,10
-   0x2adc:	jal	ra,0x20e
+   0x2adc:	jal	ra,some_function_5
    0x2ae0:	ld	a4,-88(s0)
    0x2ae4:	lw	a3,-92(s0)
    0x2ae8:	addi	a5,s0,-1536
@@ -3520,7 +3531,7 @@ entry:
    0x2b18:	mv	a0,a5
    0x2b1a:	jal	ra,0x47e
    0x2b1e:	li	a0,11
-   0x2b20:	jal	ra,0x20e
+   0x2b20:	jal	ra,some_function_5
    0x2b24:	addi	a5,s0,-1568
    0x2b28:	mv	a0,a5
    0x2b2a:	jal	ra,0x536
@@ -13133,7 +13144,7 @@ entry:
    0x9bc2:	sd	a5,-32(s0)
    0x9bc6:	lw	a5,-36(s0)
    0x9bca:	mv	a0,a5
-   0x9bcc:	jal	ra,0x1b4
+   0x9bcc:	jal	ra,some_function_4
    0x9bd0:	nop
    0x9bd2:	ld	ra,40(sp)
    0x9bd4:	ld	s0,32(sp)
